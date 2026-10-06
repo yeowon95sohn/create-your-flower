@@ -1,0 +1,1268 @@
+/* =================================
+   기본 배경
+================================= */
+
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+
+  background: linear-gradient(
+  to bottom,
+  #CBD5DD 0%,
+  #E5EBEF 35%,
+  #EDF2F5 70%,
+  #F7F9FA 100%
+);
+}
+
+
+/* =================================
+   인트로 / 꽃 제작 화면
+================================= */
+
+#createScreen {
+  display: none;
+
+  height: 100vh;
+  box-sizing: border-box;
+
+  padding-top: 0;
+  text-align: center;
+
+  transition: margin-left 0.3s ease;
+}
+
+/* 서랍이 열리면 제작 화면을 오른쪽으로 이동 */
+#createScreen.drawer-open {
+  margin-left: 300px;
+}
+
+
+/* =================================
+   꽃 제작 영역
+================================= */
+
+/* 꽃을 만드는 영역 */
+#flower {
+  position: relative;
+
+  width: 460px;
+  height: 460px;
+
+  margin: 87px auto;
+  border: none;
+
+  z-index: 2;
+}
+
+/* 완성된 꽃잎 */
+#flower > img {
+  position: absolute;
+
+  width: 230px;
+
+  left: 115px;
+  top: 57.5px;
+
+  transform-origin: 50% 100%;
+  -webkit-user-drag: none;
+}
+
+/* ===============================
+   DELETE / RESET 버튼
+================================ */
+
+#controls 
+{
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+
+/* 두 버튼 공통 */
+#deleteButton,
+#resetButton {
+  min-width: 150px;
+  height: 42px;
+
+  padding: 0 24px;
+
+  border-radius: 999px;
+
+  /* 유리 느낌 */
+  background: rgba(255, 255, 255, 0.16);
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  box-shadow:
+    0 4px 14px rgba(96, 116, 132, 0.08),
+    inset 0 1px 1px rgba(255, 255, 255, 0.75);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  /* 글씨 */
+  color: #65717B;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* 마우스 올렸을 때 */
+#deleteButton:hover,
+#resetButton:hover {
+  transform: translateY(-2px);
+
+  background: rgba(255, 255, 255, 0.28);
+
+  box-shadow:
+    0 6px 18px rgba(96, 116, 132, 0.12),
+    0 0 12px rgba(255, 255, 255, 0.65),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+
+/* 누르는 순간 */
+#deleteButton:active,
+#resetButton:active {
+  transform: translateY(0) scale(0.97);
+}
+
+
+/* =================================
+   서랍 열기: 꽃 아이콘 버튼
+================================= */
+
+#drawerButton {
+  position: fixed;
+  top: 25px;
+  left: 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  padding: 8px;
+
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+  z-index: 50;
+}
+
+#drawerButton img {
+  display: block;
+
+  width: 85px;
+  height: 85px;
+  object-fit: contain;
+
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
+}
+
+#drawerButton span {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #65717B;
+}
+
+#drawerButton:hover img {
+  transform: scale(1.08);
+
+  filter: drop-shadow(
+    0 0 12px rgba(255, 255, 255, 0.95)
+  );
+}
+
+#drawerButton:active img {
+  transform: scale(0.95);
+}
+
+
+/* =================================
+   왼쪽 꽃잎 서랍
+================================= */
+
+/* ===============================
+   왼쪽 꽃잎 서랍
+================================ */
+
+/* ===============================
+   왼쪽 꽃잎 서랍
+================================ */
+
+/* ===============================
+   꽃잎 서랍
+================================ */
+
+#drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 300px;
+  height: 100vh;
+
+  display: grid;
+  grid-template-columns: repeat(2, 140px);
+  grid-auto-rows: 160px;
+
+  column-gap: 0;
+  row-gap: 0;
+
+  justify-content: center;
+  justify-items: center;
+  align-content: start;
+
+  padding: 100px 0 30px;
+  box-sizing: border-box;
+
+  background: rgba(105, 122, 138, 0.045);
+
+  border: none;
+  border-right: 2px solid rgba(255, 255, 255, 0.95);
+  border-radius: 0 28px 28px 0;
+
+  box-shadow: 5px 0 12px -5px rgba(255, 255, 255, 0.75);
+
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+
+  transform: translateX(-100%);
+  transition: transform 0.55s cubic-bezier(0.22, 0.7, 0.25, 1);
+
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  z-index: 100;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+#drawer::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* 서랍 열린 상태 */
+#drawer.open {
+  transform: translateX(0);
+}
+
+
+/* ===============================
+   서랍 오른쪽: 흰색 선 + 은은한 빛
+================================ */
+
+
+/* =================================
+   서랍 안 꽃잎
+================================= */
+
+#drawer .petal-choice {
+  position: static;
+
+  width: 140px;
+  height: 180px;
+
+  object-fit: contain;
+  cursor: grab;
+
+  touch-action: none;
+  user-select: none;
+}
+
+/* 오른쪽 열 꽃잎만 왼쪽으로 5px 이동 */
+#drawer .petal-choice:nth-of-type(2n) {
+  transform: translateX(-5px);
+}
+
+
+/* =================================
+   서랍 닫기: 화살표 아이콘 버튼
+================================= */
+
+#closeDrawer {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  cursor: pointer;
+  z-index: 200;
+}
+
+/* 화살표 이미지는 반드시 버튼 안에 들어가도록 */
+#closeDrawer img {
+  display: block;
+
+  width: 34px;
+  height: 34px;
+  max-width: 34px;
+  max-height: 34px;
+
+  object-fit: contain;
+
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+#closeDrawer:hover img {
+  transform: scale(1.20);
+}
+
+#closeDrawer:active img {
+  transform: scale(0.95);
+}
+
+
+/* =================================
+   모바일 터치 드래그
+================================= */
+
+.touch-dragging {
+  position: fixed;
+
+  width: 120px;
+
+  pointer-events: none;
+  z-index: 9999;
+
+  transform: translate(-50%, -50%);
+  opacity: 0.8;
+}
+
+
+/* =================================
+   빛나는 파문 애니메이션
+================================= */
+
+.ripple-container {
+  position: fixed;
+
+  width: 0;
+  height: 0;
+
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ripple {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 100px;
+  height: 100px;
+
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%) scale(0.3);
+  opacity: 0;
+
+  background: radial-gradient(
+    circle,
+    rgba(235, 243, 249, 0.02) 55%,
+    rgba(225, 237, 246, 0.15) 85%,
+    rgba(255, 255, 255, 0.4) 100%
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.85);
+
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 0.9),
+    0 0 28px rgba(185, 211, 230, 0.45),
+    inset 0 0 18px rgba(255, 255, 255, 0.6);
+
+  animation: rippleExpand 3.2s ease-out forwards;
+}
+
+.ripple:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.ripple:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+@keyframes rippleExpand {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 0.9;
+  }
+
+  65% {
+    opacity: 0.55;
+  }
+
+  100% {
+    transform:
+      translate(-50%, -50%) scale(var(--ripple-scale));
+
+    opacity: 0;
+  }
+}
+
+/* ===============================
+   오프닝 화면
+================================ */
+
+#introScreen {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 1000;
+
+  background: rgba(247, 249, 250, 0.92);
+
+  transition:
+    opacity 1.2s ease,
+    filter 1.2s ease;
+}
+
+
+/* START 누른 뒤 */
+#introScreen.fade-out {
+  opacity: 0;
+  filter: blur(10px);
+
+  pointer-events: none;
+}
+
+
+/* 작업 화면은 처음에 살짝 흐리게 */
+#createScreen {
+  opacity: 0;
+
+  transition:
+    opacity 1.2s ease;
+}
+
+
+/* 작업 화면 등장 */
+#createScreen.show {
+  opacity: 1;
+}
+
+/* =================================
+   OPENING
+================================= */
+
+#introScreen {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(
+    to bottom,
+    #F7F9FA 0%,
+    #EDF2F5 35%,
+    #E5EBEF 70%,
+    #D6DEE4 100%
+  );
+
+  z-index: 5000;
+
+  transition:
+    opacity 1.2s ease,
+    filter 1.2s ease;
+}
+
+
+/* -------------------------------
+   처음 등장하는 문장
+-------------------------------- */
+
+#introMessage {
+  position: absolute;
+
+  margin: 0;
+
+  color: #33485C;
+
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+
+  opacity: 0;
+
+  transform: translateY(8px);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+
+/* 문장 등장 */
+#introMessage.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* 문장 사라짐 */
+#introMessage.hide {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+
+/* -------------------------------
+   START 꽃 아이콘 버튼
+-------------------------------- */
+
+#startButton {
+  position: absolute;
+
+  width: 110px;
+  height: 110px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  border: none;
+
+  opacity: 0;
+  pointer-events: none;
+
+  cursor: pointer;
+
+  transform: scale(0.92);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+
+/* 꽃 등장 */
+#startButton.show {
+  opacity: 1;
+  pointer-events: auto;
+
+  transform: scale(1);
+}
+
+
+/* 꽃 이미지 */
+#startButton img {
+  width: 115px;
+  height: 115px;
+
+  object-fit: contain;
+
+  animation: startFlowerRotate 12s linear infinite;
+
+  transition:
+    filter 0.3s ease;
+}
+
+
+/* 천천히 계속 회전 */
+@keyframes startFlowerRotate {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+
+  to {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+
+/* hover 시 빛 */
+#startButton:hover img {
+  filter:
+    drop-shadow(0 0 10px rgba(255, 255, 255, 0.95))
+    drop-shadow(0 0 20px rgba(175, 205, 225, 0.55));
+}
+
+
+/* hover 시 회전 유지하면서 살짝 확대 */
+#startButton:hover {
+  transform: scale(1.08);
+}
+
+
+/* 눌렀을 때 */
+#startButton:active {
+  transform: scale(0.96);
+}
+
+
+/* -------------------------------
+   START 클릭 후 인트로 사라짐
+-------------------------------- */
+
+#introScreen.fade-out {
+  opacity: 0;
+
+  filter: blur(8px);
+
+  pointer-events: none;
+}
+
+
+/* -------------------------------
+   제작 화면 등장
+-------------------------------- */
+
+#createScreen {
+  opacity: 0;
+
+  transition: opacity 1.3s ease;
+}
+
+#createScreen.show {
+  opacity: 1;
+}
+
+#startArea {
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 8px;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 0.8s ease;
+}
+
+
+/* 꽃이 등장할 때 글자도 같이 등장 */
+#startArea.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+/* 기존 startButton의 absolute는 빼기 */
+#startButton {
+  position: relative;
+}
+
+
+/* CLICK HERE */
+#clickHere {
+  font-size: 11px;
+  letter-spacing: 1.6px;
+
+  color: #33485C;
+
+  opacity: 0.8;
+
+  user-select: none;
+}
+
+/* ===============================
+   서랍 버튼 힌트
+================================ */
+
+#drawerHint {
+  position: fixed;
+  top: 80px;
+  left: 110px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  z-index: 60;
+
+  opacity: 1;
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+
+/* 화살표 이미지 */
+#drawerHint img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+
+  animation: hintFloat 1.8s ease-in-out infinite;
+}
+
+
+/* 대각선으로 살짝 움직이기 */
+@keyframes hintFloat {
+  0% {
+    transform: translate(0, 0) rotate(-17deg);
+    opacity: 0.72;
+  }
+
+  50% {
+    transform: translate(-6px, -6px) rotate(-17deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(-17deg);
+    opacity: 0.72;
+  }
+}
+
+
+/* 숨길 때 */
+#drawerHint.hide {
+  opacity: 0;
+  transform: translate(-6px, -6px);
+
+  pointer-events: none;
+}
+
+.petal-enter {
+  animation: petalEnter 0.45s ease-out;
+}
+
+@keyframes petalEnter {
+  from {
+    opacity: 0;
+    scale: 0.95;
+  }
+
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.petal-exit {
+  animation: petalExit 0.35s ease-in forwards;
+}
+
+@keyframes petalExit {
+  from {
+    opacity: 1;
+    scale: 1;
+  }
+
+  to {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+
+/* ===============================
+   COMPLETE 버튼
+================================ */
+
+#completeButton {
+  position: fixed;
+  right: 35px;
+  bottom: 35px;
+
+  min-width: 135px;
+  height: 44px;
+  padding: 0 24px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  box-shadow:
+    0 4px 14px rgba(96, 116, 132, 0.08),
+    inset 0 1px 1px rgba(255, 255, 255, 0.75);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  color: #65717B;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.4px;
+
+  cursor: pointer;
+  z-index: 200;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    opacity 0.4s ease;
+
+    opacity: 0;
+  pointer-events: none;
+}
+
+#completeButton.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#completeButton:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* ===============================
+   책갈피
+================================ */
+
+#bookmark {
+  position: fixed;
+
+  left: 50%;
+  top: 50%;
+
+  width: min(740px, calc(100vw - 40px));
+height: min(830px, calc(100vh - 40px));
+
+  transform: translate(-50%, -50%) scale(0.96);
+
+  border-radius: 26px;
+
+  background: rgba(255, 255, 255, 0.2);
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+
+  box-shadow:
+    0 12px 40px rgba(85, 105, 120, 0.08),
+    inset 0 1px 1px rgba(255, 255, 255, 0.85);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  opacity: 0;
+  pointer-events: none;
+
+  z-index: 200;
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+#bookmark.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: auto;
+}
+
+#flower.locked {
+  pointer-events: none;
+}
+
+#backButton {
+  position: fixed;
+  top: 5px;
+  left: 10px;
+
+  width: 60px;
+  height: 60px;
+
+  padding: 0;
+
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+
+  opacity: 0;
+  pointer-events: none;
+
+  z-index: 500;
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.25s ease;
+}
+
+#backButton img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#backButton.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#backButton:hover {
+  transform: scale(1.07);
+}
+
+#flower.complete-flower {
+  position: relative;
+  z-index: 400;
+
+  transform-origin: 50% 62.5%;
+
+  animation: completeFlower 6s
+    cubic-bezier(0.22, 0.61, 0.36, 1)
+    forwards;
+}
+
+@keyframes completeFlower {
+
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  70% {
+    transform: scale(1.18) rotate(300deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+#createScreen {
+  transition:
+    margin-left 0.55s cubic-bezier(0.22, 0.7, 0.25, 1),
+    opacity 1.3s ease;
+}
+
+/* ===============================
+   완성 꽃 문구
+================================ */
+
+#flowerQuote {
+  position: absolute;
+
+  left: 50%;
+  bottom: 70px;
+
+  width: 78%;
+
+  transform: translateX(-50%);
+
+  margin: 0;
+
+  color: #65717B;
+
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+
+  text-align: center;
+
+  opacity: 0;
+
+  transition: opacity 1s ease;
+}
+
+#flowerQuote.show {
+  opacity: 1;
+}
+
+/* ===============================
+   SAVE 버튼
+================================ */
+
+#saveMenu {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+
+  z-index: 600;
+}
+
+#saveButton {
+  height: 38px;
+  min-width: 88px;
+
+  padding: 0 20px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  box-shadow:
+    0 4px 14px rgba(96, 116, 132, 0.08),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  color: #65717B;
+
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.4px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+#saveButton:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+
+/* ===============================
+   SAVE 툴팁
+================================ */
+
+#saveTooltip {
+  position: absolute;
+
+  top: 48px;
+  right: 0;
+
+  width: 145px;
+
+  padding: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  border-radius: 16px;
+
+  background: rgba(245, 248, 250, 0.72);
+
+  border: 1px solid rgba(255, 255, 255, 0.85);
+
+  box-shadow:
+    0 8px 24px rgba(85, 105, 120, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform: translateY(-5px);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s ease;
+}
+
+#saveMenu:hover #saveTooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#saveTooltip button {
+  width: 100%;
+
+  padding: 10px 12px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: transparent;
+
+  color: #65717B;
+
+  font-size: 11px;
+  letter-spacing: 0.8px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+#saveTooltip button:hover {
+  background: rgba(255, 255, 255, 0.65);
+  transform: translateX(2px);
+}
+
+/* =================================
+   서랍 꽃잎 HOVER + 설명 툴팁
+================================= */
+
+/* 꽃잎 부드럽게 커지기 */
+#drawer .petal-choice {
+  transition:
+    scale 0.3s cubic-bezier(0.22, 0.7, 0.25, 1),
+    filter 0.3s ease;
+
+  transform-origin: center center;
+}
+
+
+/* 마우스 올렸을 때 */
+#drawer .petal-choice:hover {
+  scale: 1.07;
+
+  filter:
+    drop-shadow(0 0 8px rgba(255, 255, 255, 0.95))
+    drop-shadow(0 0 20px rgba(202, 220, 233, 0.65))
+    drop-shadow(0 0 34px rgba(176, 202, 220, 0.30));
+}
+
+
+/* ===============================
+   툴팁
+================================ */
+
+#petalTooltip {
+  position: fixed;
+
+  width: 250px;
+
+  padding: 0;
+
+  /* 투명한 유리 */
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.22),
+      rgba(238, 245, 249, 0.12)
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.46);
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 10px 30px rgba(72, 94, 110, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.48);
+
+  backdrop-filter:
+    blur(18px)
+    saturate(115%);
+
+  -webkit-backdrop-filter:
+    blur(18px)
+    saturate(115%);
+
+  color: #65717B;
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transform:
+    translateX(-7px)
+    scale(0.98);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s ease;
+
+  z-index: 9999;
+
+  overflow: hidden;
+}
+
+
+/* 보이는 상태 */
+#petalTooltip.show {
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translateX(0)
+    scale(1);
+}
+
+
+/* 위쪽 제목 */
+#petalTooltipTitle {
+  padding: 14px 18px 11px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  letter-spacing: 1.4px;
+
+  color: #526473;
+
+  text-align: left;
+}
+
+
+/* 중간 구분선 */
+#petalTooltipLine {
+  width: 100%;
+  height: 1px;
+
+  background:
+    rgba(101, 113, 123, 0.13);
+}
+
+
+/* 설명 문장 */
+#petalTooltipText {
+  padding: 13px 18px 16px;
+
+  font-size: 12px;
+  font-weight: 400;
+
+  line-height: 1.7;
+
+  color: #65717B;
+
+  text-align: left;
+
+  /* '않 / 는다' 식으로 한글 중간에서
+     잘리는 것 방지 */
+  word-break: keep-all;
+  overflow-wrap: normal;
+  white-space: normal;
+}
