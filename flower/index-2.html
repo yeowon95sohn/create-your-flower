@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Create Your Flower</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+
+<body>
+
+  <section id="introScreen">
+
+  <!-- 처음 보여줄 문장 -->
+  <p id="introMessage">
+    나를 닮은 꽃잎을 골라, 하나의 꽃으로 피워보세요.
+  </p>
+
+  <!-- 실제 START 역할을 하는 꽃 아이콘 -->
+  <div id="startArea">
+
+  <button id="startButton" aria-label="시작하기">
+    <img src="images/start-flower.png" alt="">
+  </button>
+
+  <span id="clickHere">CLICK HERE</span>
+
+</div>
+
+</section>
+
+
+  <!-- 꽃 만드는 화면 -->
+  <section id="createScreen">
+
+    <!-- 왼쪽 꽃잎 서랍 열기 버튼 -->
+<button id="drawerButton" aria-label="꽃잎 서랍 열기">
+  <img src="images/flower-icon.png" alt="">
+  <span>PETALS</span>
+</button>
+
+<div id="drawerHint">
+  <img src="images/drawer-hint-arrow.png" alt="">
+</div>
+
+    <!-- 꽃잎 서랍 -->
+<div id="drawer">
+
+  <button id="closeDrawer" aria-label="서랍 닫기">
+    <img src="images/close-icon.png" alt="">
+  </button>
+
+      <img
+        src="images/균형.png"
+        class="petal-choice"
+        draggable="true"
+        data-image="images/균형.png"
+        alt="균형"
+        width="120"
+      >
+
+      <img
+        src="images/열정.png"
+        class="petal-choice"
+        draggable="true"
+        data-image="images/열정.png"
+        alt="열정"
+        width="120"
+      >
+
+      <img
+        src="images/진심.png"
+        class="petal-choice"
+        draggable="true"
+        data-image="images/진심.png"
+        alt="진심"
+        width="120"
+      >
+
+      <img
+        src="images/평온.png"
+        class="petal-choice"
+        draggable="true"
+        data-image="images/평온.png"
+        alt="평온"
+        width="120"
+      >
+
+      <img
+        src="images/호기심.png"
+        class="petal-choice"
+        draggable="true"
+        data-image="images/호기심.png"
+        alt="호기심"
+        width="120"
+      >
+
+      <img
+        src="images/희망.png"
+        class="petal-choice"
+        draggable="true"
+        data-image="images/희망.png"
+        alt="희망"
+        width="120"
+      >
+
+      <img
+        src="images/사랑.png"
+        class="petal-choice"
+        draggable="true"
+        data-image="images/사랑.png"
+        alt="사랑"
+        width="120"
+      >
+
+      <img
+        src="images/신뢰.png"
+        class="petal-choice"
+        draggable="true"
+        data-image="images/신뢰.png"
+        alt="신뢰"
+        width="120"
+      >
+
+      <img
+        src="images/직관.png"
+        class="petal-choice"
+        draggable="true"
+        data-image="images/직관.png"
+        alt="직관"
+        width="120"
+      >
+
+      <img
+        src="images/온기.png"
+        class="petal-choice"
+        draggable="true"
+        data-image="images/온기.png"
+        alt="온기"
+        width="120"
+      >
+
+      <img
+        src="images/용기.png"
+        class="petal-choice"
+        draggable="true"
+        data-image="images/용기.png"
+        alt="용기"
+        width="120"
+      >
+
+      <img
+        src="images/자유.png"
+        class="petal-choice"
+        draggable="true"
+        data-image="images/자유.png"
+        alt="자유"
+        width="120"
+      >
+
+    </div>
+
+    <div id="flower"></div>
+
+
+    <div id="controls">
+  <button id="deleteButton">DELETE SELECTED</button>
+  <button id="resetButton">RESET ALL</button>
+</div>
+
+<button id="completeButton">COMPLETE</button>
+
+<div id="bookmark">
+
+  <div id="saveMenu">
+    <button id="saveButton">SAVE</button>
+
+    <div id="saveTooltip">
+      <button id="saveDefault">기본</button>
+      <button id="saveFlower">꽃 ONLY</button>
+    </div>
+  </div>
+
+  <p id="flowerQuote"></p>
+
+</div>
+
+<button id="backButton" aria-label="다시 수정하기">
+  <img src="images/back-button.png" alt="">
+</button>
+
+  </section>
+
+
+  <script src="script.js"></script>
+
+
+</body>
+
+</html>
